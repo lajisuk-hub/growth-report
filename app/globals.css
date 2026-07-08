@@ -213,14 +213,14 @@ input, textarea, select { font-family: inherit; color: var(--ink); }
 .cover { text-align: center; }
 .cover .cover-top {
   font-family: 'Gowun Batang', serif;
-  font-size: 13px; letter-spacing: 6px; color: #a68d5e;
+  font-size: 23px; font-weight: bold; letter-spacing: 7px; color: #8c6f3f;
   border-bottom: 0.6px solid var(--line);
-  padding-bottom: 4mm;
+  padding-bottom: 4.5mm;
 }
-.cover .cover-en { font-size: 9px; letter-spacing: 4px; color: #bfa87c; margin-top: 9mm; }
+.cover .cover-en { font-size: 9px; letter-spacing: 4px; color: #bfa87c; margin-top: 8mm; }
 .cover h1 {
   font-family: 'Gowun Batang', serif;
-  font-size: 37px; color: var(--ink); line-height: 1.4; margin-top: 2.5mm; letter-spacing: 3px;
+  font-size: 40px; color: var(--ink); line-height: 1.4; margin-top: 2.5mm; letter-spacing: 3px;
 }
 .cover .cover-period {
   display: flex; align-items: center; justify-content: center; gap: 4mm;
@@ -230,23 +230,23 @@ input, textarea, select { font-family: inherit; color: var(--ink); }
   content: ''; width: 16mm; height: 0.6px; background: #c9b58f;
 }
 .cover-photo-mat {
-  width: 84mm; margin: 8mm auto 0;
+  width: 88mm; margin: auto auto 0;
   padding: 3.5mm; background: #fff;
   border: 0.6px solid #c9b58f;
   box-shadow: 0 1.5mm 4mm rgba(120, 95, 50, 0.10);
 }
 .cover-photo-mat .inner {
-  width: 100%; height: 88mm; overflow: hidden; background: var(--cream);
+  width: 100%; height: 92mm; overflow: hidden; background: var(--cream);
   display: flex; align-items: center; justify-content: center;
 }
 .cover-photo-mat img { width: 100%; height: 100%; object-fit: cover; }
 .cover-photo-mat .placeholder { font-size: 52px; }
 .cover .child-name {
   font-family: 'Gowun Batang', serif;
-  font-size: 27px; margin-top: 6mm; color: var(--ink); letter-spacing: 2px;
+  font-size: 28px; margin-top: 6mm; color: var(--ink); letter-spacing: 2px;
 }
 .cover-info-table {
-  width: 118mm; margin: 6mm auto 0;
+  width: 118mm; margin: auto auto 0;
   border-top: 1.2px solid #8c6f3f;
   border-bottom: 1.2px solid #8c6f3f;
   font-size: 12px;
@@ -266,13 +266,16 @@ input, textarea, select { font-family: inherit; color: var(--ink); }
 .cover .center-name {
   margin-top: auto; padding-top: 4mm;
   font-family: 'Gowun Batang', serif;
-  font-size: 14px; letter-spacing: 5px; color: #8c6f3f;
+  font-size: 16px; letter-spacing: 5px; color: #8c6f3f;
   border-top: 0.6px solid var(--line);
 }
 
-/* ── 2·3쪽: 발달 이야기 섹션 ── */
-.area-list { display: flex; flex-direction: column; }
-.section { padding: 3.6mm 0 4.2mm; border-bottom: 0.5px solid var(--line); }
+/* ── 2·3쪽: 발달 이야기 섹션 — 남는 공간을 고르게 나눠 가짐 ── */
+.area-list { flex: 1; display: flex; flex-direction: column; }
+.section {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  padding: 3mm 0; border-bottom: 0.5px solid var(--line);
+}
 .section:last-child { border-bottom: none; }
 .sec-head { display: flex; align-items: baseline; gap: 3mm; margin-bottom: 1.8mm; }
 .sec-num {
@@ -293,23 +296,27 @@ input, textarea, select { font-family: inherit; color: var(--ink); }
 .chip-sage { color: var(--sage-deep); border-color: #b9cfb1; background: #f3f7f0; }
 .chip-sky  { color: #5b87a8; border-color: #b3cbdd; background: #f0f5f9; }
 .chip-gold { color: #8c6f3f; border-color: #d5c398; background: #faf5ea; }
-.section p { font-size: 12.5px; line-height: 1.85; color: var(--ink); white-space: pre-wrap; }
+.section p { font-size: 13px; line-height: 1.9; color: var(--ink); white-space: pre-wrap; }
 
-.photo-band { display: flex; gap: 5mm; margin-top: 5.5mm; justify-content: center; }
-.report-photo { flex: 1; max-width: 80mm; text-align: center; }
+.photo-band { display: flex; gap: 5mm; margin: 6mm 0 5mm; justify-content: center; }
+.report-photo { flex: 1; max-width: 82mm; text-align: center; }
 .report-photo .ph-frame {
   border: 0.6px solid #c9b58f;
   padding: 2.5mm; background: #fff;
   box-shadow: 0 1mm 3mm rgba(120, 95, 50, 0.08);
 }
-.report-photo img { width: 100%; height: 50mm; object-fit: cover; display: block; }
+.report-photo img { width: 100%; height: 57mm; object-fit: cover; display: block; }
 .report-photo .cap { font-size: 10.5px; color: var(--ink-soft); margin-top: 1.8mm; letter-spacing: 0.5px; }
 
-/* ── 4쪽: 총평 · 편지 · 안내 ── */
+/* ── 4쪽: 총평 · 편지 · 안내 — 세로로 고르게 배치 ── */
+.page4-body {
+  flex: 1; display: flex; flex-direction: column; justify-content: space-evenly;
+  padding-bottom: 4mm;
+}
 .grow-box {
   border-left: 1.4mm solid #bd7b55;
   background: #faf4ed;
-  padding: 4.5mm 5.5mm; margin-bottom: 6mm;
+  padding: 5mm 5.5mm;
 }
 .grow-box .g-title {
   font-family: 'Gowun Batang', serif; font-size: 14px; font-weight: bold; color: #a6633f;
@@ -320,7 +327,7 @@ input, textarea, select { font-family: inherit; color: var(--ink); }
 .letter-box {
   border: 0.6px solid #c9b58f;
   background: #fdfaf3;
-  padding: 7mm 8mm;
+  padding: 8mm 9mm;
   position: relative;
 }
 .letter-box::before {
@@ -347,7 +354,7 @@ input, textarea, select { font-family: inherit; color: var(--ink); }
 .next-box {
   border-left: 1.4mm solid var(--sage-deep);
   background: #f5f8f2;
-  padding: 4.5mm 5.5mm; margin-top: 6mm;
+  padding: 5mm 5.5mm;
 }
 .next-box .n-title {
   font-family: 'Gowun Batang', serif; font-size: 14px; font-weight: bold; color: var(--sage-deep);

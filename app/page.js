@@ -446,25 +446,27 @@ function ReportSheets({ info, result, photos }) {
             <h3>선생님의 마음</h3>
             <div className="head-sub">한 학기의 총평과 다음 학기 안내를 전해 드립니다.</div>
           </div>
-          {result.grow && result.grow.trim() ? (
-            <div className="grow-box">
-              <div className="g-title">한 학기 총평 — 가장 큰 변화</div>
-              <p>{result.grow}</p>
-            </div>
-          ) : null}
-          {result.letter && result.letter.trim() ? (
-            <div className="letter-box">
-              <div className="letter-title">{name} 부모님께 드리는 편지</div>
-              <p>{result.letter}</p>
-              <div className="sign">{name}의 담임 {info.teacherName || ''} 드림</div>
-            </div>
-          ) : null}
-          {result.next && result.next.trim() ? (
-            <div className="next-box">
-              <div className="n-title">2학기 안내</div>
-              <p>{result.next}</p>
-            </div>
-          ) : null}
+          <div className="page4-body">
+            {result.grow && result.grow.trim() ? (
+              <div className="grow-box">
+                <div className="g-title">한 학기 총평 — 가장 큰 변화</div>
+                <p>{result.grow}</p>
+              </div>
+            ) : null}
+            {result.letter && result.letter.trim() ? (
+              <div className="letter-box">
+                <div className="letter-title">{name} 부모님께 드리는 편지</div>
+                <p>{result.letter}</p>
+                <div className="sign">{name}의 담임 {info.teacherName || ''} 드림</div>
+              </div>
+            ) : null}
+            {result.next && result.next.trim() ? (
+              <div className="next-box">
+                <div className="n-title">2학기 안내</div>
+                <p>{result.next}</p>
+              </div>
+            ) : null}
+          </div>
           <PageFoot info={info} name={name} page="04" />
         </div>
       </div>
