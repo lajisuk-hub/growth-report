@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 
-const STORAGE_KEY = 'growth-report-v1';
+const STORAGE_KEY = 'growth-report-v2';
 
 const EMPTY_INFO = {
   centerName: '',
@@ -14,24 +14,23 @@ const EMPTY_INFO = {
 };
 
 const INTERVIEW_QUESTIONS = [
-  { key: 'daily', label: '① 식사와 스스로 하기', sub: '밥·간식은 어떻게 먹나요? 손씻기·정리 등 스스로 하게 된 것은?', ph: '예: 편식이 줄어서 채소도 한두 입 먹어봐요. 식사 후 자리 정리를 스스로 해요' },
-  { key: 'body', label: '② 신체운동 · 건강', sub: '좋아하는 몸놀이, 바깥놀이는 무엇인가요?', ph: '예: 바깥놀이 시간에 달리기를 제일 좋아해요. 계단 오르내리기가 안정적이에요' },
-  { key: 'talk', label: '③ 말하기 · 듣기 · 책', sub: '요즘 자주 하는 말, 좋아하는 책이 있나요?', ph: '예: 문장으로 말하는 게 늘었어요. 공룡 책을 매일 가져와요' },
-  { key: 'friend', label: '④ 친구 관계', sub: '친구들과 어떻게 지내나요? 기억에 남는 장면은?', ph: '예: 친구에게 먼저 장난감을 양보한 적이 있어요. 단짝 친구와 병원놀이를 즐겨요' },
-  { key: 'art', label: '⑤ 예술 (그리기·노래·율동)', sub: '좋아하는 미술·음악 활동, 최근 작품은?', ph: '예: 노래에 맞춰 율동하는 걸 좋아해요. 가족 그림을 정성껏 그렸어요' },
-  { key: 'nature', label: '⑥ 자연탐구 · 호기심', sub: '궁금해하는 것, 좋아하는 탐색 놀이는?', ph: '예: 산책길에 개미를 한참 관찰해요. 물놀이 실험을 좋아해요' },
-  { key: 'play', label: '⑦ 요즘 푹 빠진 놀이', sub: '요즘 가장 즐겨 하는 놀이 한 가지를 알려주세요', ph: '예: 블록으로 주차타워 만들기에 푹 빠져 있어요' },
-  { key: 'grow', label: '⑧ 1학기 동안 가장 자란 점', sub: '3월과 비교해 가장 크게 달라진 모습은?', ph: '예: 등원할 때 울지 않고 씩씩하게 인사해요' },
-  { key: 'letter', label: '⑨ 부모님께 전하고 싶은 말', sub: '짧게 적어주시면 따뜻한 편지로 다듬어 드려요', ph: '예: 한 학기 동안 믿고 맡겨주셔서 감사해요. 2학기에도 잘 지켜봐 주고 싶어요' },
-  { key: 'next', label: '⑩ 2학기 안내', sub: '2학기에 예정된 활동·행사를 적어주세요', ph: '예: 9월 가족운동회, 10월 가을소풍, 숲체험 시작' },
+  { key: 'march', label: '① 아이의 3월은 어떠하였나요?', sub: '처음 등원했을 때, 적응하던 모습을 떠올려 주세요', ph: '예: 엄마와 떨어질 때 많이 울었어요. 일주일쯤 지나니 선생님 손을 잡고 들어왔어요' },
+  { key: 'worry', label: '② 부모님께서 어린이집 다니며 가장 걱정하신 부분은?', sub: '걱정하셨던 점과, 한 학기 동안 어떻게 달라졌는지 적어주세요', ph: '예: 밥을 잘 안 먹을까 걱정하셨는데, 지금은 스스로 한 그릇을 다 먹어요' },
+  { key: 'food', label: '③ 아이가 잘 먹는 음식은?', sub: '좋아하는 음식, 식사 시간 모습을 알려주세요', ph: '예: 미역국과 계란찜을 제일 좋아해요. 채소도 한두 입 먹어봐요' },
+  { key: 'play', label: '④ 아이가 좋아하는 놀이는?', sub: '즐겨 하는 놀이를 알려주세요', ph: '예: 블록 쌓기와 미끄럼틀을 좋아해요' },
+  { key: 'topic', label: '⑤ 아이가 최근 들어 관심 있는 놀이주제는?', sub: '요즘 푹 빠져 있는 주제가 있나요?', ph: '예: 공룡에 푹 빠져서 공룡 책과 공룡 흉내내기 놀이를 매일 해요' },
+  { key: 'friend', label: '⑥ 친구관계는 어떠한가요?', sub: '친구들과 지내는 모습, 기억에 남는 장면을 알려주세요', ph: '예: 친구에게 먼저 장난감을 양보한 적이 있어요. 단짝 친구와 병원놀이를 즐겨요' },
+  { key: 'grow', label: '⑦ 1학기 동안 가장 큰 변화는?', sub: '3월과 비교해 가장 크게 달라진 모습은?', ph: '예: 등원할 때 울지 않고 씩씩하게 인사해요' },
+  { key: 'letter', label: '⑧ 부모님께 전하고 싶은 말', sub: '짧게 적어주시면 따뜻한 편지로 다듬어 드려요', ph: '예: 한 학기 동안 믿고 맡겨주셔서 감사해요. 2학기에도 잘 지켜봐 주고 싶어요' },
+  { key: 'next', label: '⑨ 2학기 어린이집(우리 반)의 계획', sub: '2학기에 예정된 활동·행사를 적어주세요', ph: '예: 9월 가족운동회, 10월 가을소풍, 숲체험 시작' },
 ];
 
-const EMPTY_TEXT = { daily: '', body: '', talk: '', friend: '', art: '', nature: '', play: '', grow: '', letter: '', next: '' };
+const EMPTY_TEXT = { march: '', worry: '', food: '', play: '', topic: '', friend: '', grow: '', letter: '', next: '' };
 
 const RESULT_LABELS = {
-  daily: '기본생활습관', body: '신체운동 · 건강', talk: '의사소통', friend: '사회관계',
-  art: '예술경험', nature: '자연탐구', play: '요즘 푹 빠진 놀이', grow: '1학기 동안 자란 점',
-  letter: '선생님의 편지', next: '2학기 안내',
+  march: '3월의 우리 아이', worry: '부모님의 걱정, 이렇게 자랐어요', food: '잘 먹는 음식 · 식사 이야기',
+  play: '좋아하는 놀이', topic: '요즘 관심 있는 놀이주제', friend: '친구 이야기',
+  grow: '1학기 동안 가장 큰 변화', letter: '선생님의 편지', next: '2학기 안내',
 };
 
 // 사진을 작게 줄여서 저장 (용량 문제 방지)
@@ -322,13 +321,12 @@ export default function Home() {
 // ───────── 보고서 4쪽 ─────────
 
 const AREA_META = {
-  daily: { icon: '🍚', tint: 'tint-gold', title: '기본생활습관' },
-  body: { icon: '🏃', tint: 'tint-sage', title: '신체운동 · 건강' },
-  talk: { icon: '💬', tint: 'tint-sky', title: '의사소통' },
-  friend: { icon: '🤝', tint: 'tint-rose', title: '사회관계' },
-  art: { icon: '🎨', tint: 'tint-gold', title: '예술경험' },
-  nature: { icon: '🌱', tint: 'tint-sage', title: '자연탐구' },
-  play: { icon: '🧸', tint: 'tint-sky', title: '요즘 푹 빠진 놀이' },
+  march: { icon: '🌸', tint: 'tint-rose', title: '3월, 처음 만났을 때' },
+  worry: { icon: '💛', tint: 'tint-gold', title: '부모님의 걱정, 이렇게 자랐어요' },
+  food: { icon: '🍚', tint: 'tint-sage', title: '잘 먹는 음식 · 식사 이야기' },
+  play: { icon: '🧸', tint: 'tint-sky', title: '좋아하는 놀이' },
+  topic: { icon: '🔍', tint: 'tint-gold', title: '요즘 관심 있는 놀이주제' },
+  friend: { icon: '🤝', tint: 'tint-rose', title: '친구 이야기' },
 };
 
 function AreaCard({ k, text }) {
@@ -395,9 +393,9 @@ function ReportSheets({ info, result, photos }) {
             <h3>무럭무럭 자란 이야기 ①</h3>
           </div>
           <div className="area-list">
-            <AreaCard k="daily" text={result.daily} />
-            <AreaCard k="body" text={result.body} />
-            <AreaCard k="talk" text={result.talk} />
+            <AreaCard k="march" text={result.march} />
+            <AreaCard k="worry" text={result.worry} />
+            <AreaCard k="food" text={result.food} />
           </div>
           <PhotoBand items={[photos[0], photos[1]]} />
           <div className="page-foot">{foot}</div>
@@ -412,10 +410,9 @@ function ReportSheets({ info, result, photos }) {
             <h3>무럭무럭 자란 이야기 ②</h3>
           </div>
           <div className="area-list">
-            <AreaCard k="friend" text={result.friend} />
-            <AreaCard k="art" text={result.art} />
-            <AreaCard k="nature" text={result.nature} />
             <AreaCard k="play" text={result.play} />
+            <AreaCard k="topic" text={result.topic} />
+            <AreaCard k="friend" text={result.friend} />
           </div>
           <PhotoBand items={[photos[2], photos[3]]} />
           <div className="page-foot">{foot}</div>
@@ -431,7 +428,7 @@ function ReportSheets({ info, result, photos }) {
           </div>
           {result.grow && result.grow.trim() ? (
             <div className="grow-box">
-              <div className="g-title">🌼 한 학기 동안 이만큼 자랐어요</div>
+              <div className="g-title">🌼 1학기 동안 가장 큰 변화</div>
               <p>{result.grow}</p>
             </div>
           ) : null}
