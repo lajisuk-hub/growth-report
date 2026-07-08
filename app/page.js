@@ -8,6 +8,7 @@ const EMPTY_INFO = {
   centerName: '',
   className: '',
   childName: '',
+  birth: '',
   teacherName: '',
   period: '2026학년도 1학기',
   coverPhoto: '',
@@ -178,6 +179,10 @@ export default function Home() {
               <div className="field">
                 <label>아이 이름</label>
                 <input type="text" value={info.childName} onChange={(e) => setI('childName', e.target.value)} placeholder="예: 김하늘" />
+              </div>
+              <div className="field">
+                <label>생년월일 (또는 연령)</label>
+                <input type="text" value={info.birth} onChange={(e) => setI('birth', e.target.value)} placeholder="예: 2022. 5. 14. (만 3세)" />
               </div>
               <div className="field">
                 <label>담임 선생님 이름</label>
@@ -395,6 +400,9 @@ function ReportSheets({ info, result, photos }) {
           <div className="child-name">{name}</div>
           <div className="cover-info-table">
             <div className="row"><span className="k">소속 반</span><span className="v">{info.className || ''}</span></div>
+            {info.birth ? (
+              <div className="row"><span className="k">생년월일</span><span className="v">{info.birth}</span></div>
+            ) : null}
             <div className="row"><span className="k">담임 교사</span><span className="v">{info.teacherName ? `${info.teacherName} 선생님` : ''}</span></div>
             <div className="row"><span className="k">기록 기간</span><span className="v">{info.period || ''}</span></div>
           </div>
