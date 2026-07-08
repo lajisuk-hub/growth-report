@@ -1,7 +1,7 @@
 import './globals.css';
 
 export const metadata = {
-  title: '우리 아이 성장 보고서 만들기',
+  title: '어린이집 한학기 성장보고서',
   description: '인터뷰에 답하면 AI가 문장을 다듬어 4쪽 성장 보고서(생활기록부)를 만들어 드려요',
 };
 

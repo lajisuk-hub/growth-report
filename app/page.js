@@ -150,7 +150,7 @@ export default function Home() {
     <>
       <div className="app-ui">
         <div className="app-header">
-          <h1>🌷 우리 아이 성장 보고서</h1>
+          <h1>🌷 어린이집 한학기 성장보고서</h1>
           <p>인터뷰에 답하듯 짧게 적으면, AI가 학부모님께 드릴 예쁜 문장으로 다듬어 드려요</p>
         </div>
 
