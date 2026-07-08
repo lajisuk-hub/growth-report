@@ -321,20 +321,24 @@ export default function Home() {
 // ───────── 보고서 4쪽 ─────────
 
 const AREA_META = {
-  march: { icon: '🌸', tint: 'tint-rose', title: '3월, 처음 만났을 때' },
-  worry: { icon: '💛', tint: 'tint-gold', title: '부모님의 걱정, 이렇게 자랐어요' },
-  food: { icon: '🍚', tint: 'tint-sage', title: '잘 먹는 음식 · 식사 이야기' },
-  play: { icon: '🧸', tint: 'tint-sky', title: '좋아하는 놀이' },
-  topic: { icon: '🔍', tint: 'tint-gold', title: '요즘 관심 있는 놀이주제' },
-  friend: { icon: '🤝', tint: 'tint-rose', title: '친구 이야기' },
+  march: { num: '01', chip: '적응 · 정서', chipColor: 'chip-clay', title: '3월, 처음 만났을 때' },
+  worry: { num: '02', chip: '가정 연계', chipColor: 'chip-gold', title: '부모님의 걱정, 이렇게 자랐어요' },
+  food: { num: '03', chip: '기본생활', chipColor: 'chip-sage', title: '잘 먹는 음식과 식사 이야기' },
+  play: { num: '04', chip: '놀이', chipColor: 'chip-sky', title: '좋아하는 놀이' },
+  topic: { num: '05', chip: '관심 · 탐구', chipColor: 'chip-clay', title: '요즘 관심 있는 놀이주제' },
+  friend: { num: '06', chip: '사회관계', chipColor: 'chip-sage', title: '친구와의 관계' },
 };
 
-function AreaCard({ k, text }) {
+function Section({ k, text }) {
   const m = AREA_META[k];
   if (!text || !text.trim()) return null;
   return (
-    <div className={`area-card ${m.tint}`}>
-      <div className="area-title"><span className="icon">{m.icon}</span>{m.title}</div>
+    <div className="section">
+      <div className="sec-head">
+        <span className="sec-num">{m.num}</span>
+        <span className="sec-title">{m.title}</span>
+        <span className={`sec-chip ${m.chipColor}`}>{m.chip}</span>
+      </div>
       <p>{text}</p>
     </div>
   );
@@ -355,98 +359,113 @@ function PhotoBand({ items }) {
   );
 }
 
+function PageFoot({ info, name, page }) {
+  return (
+    <div className="page-foot">
+      <span>{info.centerName || ''}</span>
+      <span>{name}의 성장 기록</span>
+      <span>{page} / 04</span>
+    </div>
+  );
+}
+
 function ReportSheets({ info, result, photos }) {
   const name = info.childName || '○○';
-  const foot = `${info.centerName || ''} · ${name}의 성장 이야기`;
+  const band = (
+    <div className="rep-band">
+      <span>GROWTH &amp; DEVELOPMENT REPORT</span>
+      <span>{info.period || '1학기'}</span>
+    </div>
+  );
 
   return (
     <>
       {/* 1쪽 — 표지 */}
       <div className="sheet">
         <div className="sheet-inner cover">
-          <div>
-            <div className="top-line">GROWING TOGETHER</div>
-            <h1>우리 아이<br />성장 이야기</h1>
-            <div className="period">{info.period || '1학기'}</div>
+          <div className="cover-top">{info.centerName || '어린이집'}</div>
+          <div className="cover-en">GROWTH &amp; DEVELOPMENT REPORT</div>
+          <h1>한 학기 성장 보고서</h1>
+          <div className="cover-period">{info.period || '1학기'}</div>
+          <div className="cover-photo-mat">
+            <div className="inner">
+              {info.coverPhoto ? <img src={info.coverPhoto} alt="" /> : <span className="placeholder">🌷</span>}
+            </div>
           </div>
-          <div>
-            <div className="cover-photo-frame">
-              <div className="inner">
-                {info.coverPhoto ? <img src={info.coverPhoto} alt="" /> : <span className="placeholder">🐥</span>}
-              </div>
-            </div>
-            <div className="child-name">사랑스러운 <b>{name}</b>의 기록</div>
-            <div className="cover-info">
-              {info.className ? <span>🌼 {info.className}</span> : null}
-              {info.teacherName ? <span>💛 담임 {info.teacherName} 선생님</span> : null}
-            </div>
+          <div className="child-name">{name}</div>
+          <div className="cover-info-table">
+            <div className="row"><span className="k">소속 반</span><span className="v">{info.className || ''}</span></div>
+            <div className="row"><span className="k">담임 교사</span><span className="v">{info.teacherName ? `${info.teacherName} 선생님` : ''}</span></div>
+            <div className="row"><span className="k">기록 기간</span><span className="v">{info.period || ''}</span></div>
           </div>
           <div className="center-name">{info.centerName || ''}</div>
         </div>
       </div>
 
-      {/* 2쪽 — 성장 이야기 ① */}
+      {/* 2쪽 — 발달 이야기 Ⅰ */}
       <div className="sheet">
         <div className="sheet-inner">
+          {band}
           <div className="page-head">
-            <div className="deco">✿ ❀ ✿</div>
-            <h3>무럭무럭 자란 이야기 ①</h3>
+            <h3>{name}의 성장 발달 이야기 Ⅰ</h3>
+            <div className="head-sub">한 학기 동안 선생님이 곁에서 지켜본 우리 아이의 모습입니다.</div>
           </div>
           <div className="area-list">
-            <AreaCard k="march" text={result.march} />
-            <AreaCard k="worry" text={result.worry} />
-            <AreaCard k="food" text={result.food} />
+            <Section k="march" text={result.march} />
+            <Section k="worry" text={result.worry} />
+            <Section k="food" text={result.food} />
           </div>
           <PhotoBand items={[photos[0], photos[1]]} />
-          <div className="page-foot">{foot}</div>
+          <PageFoot info={info} name={name} page="02" />
         </div>
       </div>
 
-      {/* 3쪽 — 성장 이야기 ② */}
+      {/* 3쪽 — 발달 이야기 Ⅱ */}
       <div className="sheet">
         <div className="sheet-inner">
+          {band}
           <div className="page-head">
-            <div className="deco">✿ ❀ ✿</div>
-            <h3>무럭무럭 자란 이야기 ②</h3>
+            <h3>{name}의 성장 발달 이야기 Ⅱ</h3>
+            <div className="head-sub">놀이와 관계 속에서 자라나는 모습을 담았습니다.</div>
           </div>
           <div className="area-list">
-            <AreaCard k="play" text={result.play} />
-            <AreaCard k="topic" text={result.topic} />
-            <AreaCard k="friend" text={result.friend} />
+            <Section k="play" text={result.play} />
+            <Section k="topic" text={result.topic} />
+            <Section k="friend" text={result.friend} />
           </div>
           <PhotoBand items={[photos[2], photos[3]]} />
-          <div className="page-foot">{foot}</div>
+          <PageFoot info={info} name={name} page="03" />
         </div>
       </div>
 
-      {/* 4쪽 — 선생님의 편지 & 2학기 안내 */}
+      {/* 4쪽 — 총평 · 편지 · 2학기 안내 */}
       <div className="sheet">
         <div className="sheet-inner">
+          {band}
           <div className="page-head">
-            <div className="deco">💌</div>
             <h3>선생님의 마음</h3>
+            <div className="head-sub">한 학기의 총평과 다음 학기 안내를 전해 드립니다.</div>
           </div>
           {result.grow && result.grow.trim() ? (
             <div className="grow-box">
-              <div className="g-title">🌼 1학기 동안 가장 큰 변화</div>
+              <div className="g-title">한 학기 총평 — 가장 큰 변화</div>
               <p>{result.grow}</p>
             </div>
           ) : null}
           {result.letter && result.letter.trim() ? (
             <div className="letter-box">
-              <div className="letter-title">💛 {name} 부모님께 드리는 편지</div>
+              <div className="letter-title">{name} 부모님께 드리는 편지</div>
               <p>{result.letter}</p>
               <div className="sign">{name}의 담임 {info.teacherName || ''} 드림</div>
             </div>
           ) : null}
           {result.next && result.next.trim() ? (
             <div className="next-box">
-              <div className="n-title">🌈 2학기에는 이런 날들이 기다려요</div>
+              <div className="n-title">2학기 안내</div>
               <p>{result.next}</p>
             </div>
           ) : null}
-          <div className="deco-row">✿ ❀ ✿</div>
-          <div className="page-foot">{info.centerName || ''}</div>
+          <PageFoot info={info} name={name} page="04" />
         </div>
       </div>
     </>
