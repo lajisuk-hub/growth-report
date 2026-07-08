@@ -263,12 +263,14 @@ input, textarea, select { font-family: inherit; color: var(--ink); }
   background: #faf5ea;
 }
 .cover-info-table .v { flex: 1; padding: 2.4mm 0; color: var(--ink); letter-spacing: 1px; }
-.cover .center-name {
+.cover .cover-quote {
   margin-top: auto; padding-top: 4mm;
   font-family: 'Gowun Batang', serif;
-  font-size: 16px; letter-spacing: 5px; color: #8c6f3f;
+  font-size: 13.5px; letter-spacing: 2px; color: var(--ink-soft);
   border-top: 0.6px solid var(--line);
 }
+.cover .cover-quote::before { content: '❝ '; color: #bd7b55; }
+.cover .cover-quote::after { content: ' ❞'; color: #bd7b55; }
 
 /* ── 2·3쪽: 발달 이야기 섹션 — 남는 공간을 고르게 나눠 가짐 ── */
 .area-list { flex: 1; display: flex; flex-direction: column; }

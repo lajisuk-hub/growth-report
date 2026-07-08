@@ -406,7 +406,7 @@ function ReportSheets({ info, result, photos }) {
             <div className="row"><span className="k">담임 교사</span><span className="v">{info.teacherName ? `${info.teacherName} 선생님` : ''}</span></div>
             <div className="row"><span className="k">기록 기간</span><span className="v">{info.period || ''}</span></div>
           </div>
-          <div className="center-name">{info.centerName || ''}</div>
+          <div className="cover-quote">아이는 놀이와 경험 속에서 자랍니다</div>
         </div>
       </div>
 
